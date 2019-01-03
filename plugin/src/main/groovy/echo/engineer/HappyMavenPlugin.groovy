@@ -11,8 +11,50 @@ import org.gradle.api.Project
  */
 
 class HappyMavenPlugin implements Plugin<Project> {
+
     @Override
     void apply(Project project) {
+        // 0. runtime check
+        def hasApp = project.plugins.findPlugin("com.android.application")
+        def hasLib = project.plugins.findPlugin("com.android.library")
+        if (!hasApp && !hasLib) {
+            throw new IllegalStateException("'android' or 'android-library' plugin required.")
+        }
 
+        // 1. create HappyMaven extension
+        project.extensions.create("HappyMaven", HappyMavenExtension)
+        project.afterEvaluate {
+            // 2. read config
+            def extension = project.HappyMaven
+            def rootExt = project.rootProject.ext
+            def global = rootExt.has("HappyMaven") ? rootExt.HappyMaven : null
+            if (!extension && !global) {
+                throw new IllegalStateException("please config HappyMaven first.")
+            }
+            // 3. final config
+            def config = new HappyMavenExtension()
+            println("****************** HappyMaven ******************")
+            if (global) {
+                HappyParser.parseRootConfig(global, config)
+            }
+            if (extension) {
+                HappyParser.parseModuleConfig(extension, config)
+            }
+            println("\n---Final Config---")
+            println(config)
+            if (!config.groupId) {
+                throw new IllegalStateException("groupId is nil.")
+            }
+            if (!config.artifactId) {
+                throw new IllegalStateException("artifactId is nil.")
+            }
+            if (!config.version) {
+                throw new IllegalStateException("version is nil.")
+            }
+            if (!config.packaging) {
+                throw new IllegalStateException("packaging is nil.")
+            }
+            println("\n****************** HappyMaven ******************")
+        }
     }
 }
