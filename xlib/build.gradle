@@ -32,3 +32,27 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+buildscript {
+    repositories {
+        maven {
+            url 'file:../localPublish'
+        }
+    }
+    dependencies {
+        classpath 'engineer.echo:happymaven:0.0.1'
+    }
+}
+apply plugin: 'happy-maven'
+
+HappyMaven {
+    //Main
+    groupId = "engineer.echo"
+    artifactId = "xlib"
+    version = "0.0.2-SNAPSHOT"
+
+    packaging = "aar"
+    //Repo
+    releaseRepoUrl = "../localPublish"
+    snapshotRepoUrl = "../localPublish"
+}

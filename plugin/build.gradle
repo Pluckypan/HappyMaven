@@ -1,6 +1,5 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply plugin: 'signing'
 
 dependencies {
     compile gradleApi()
@@ -17,14 +16,7 @@ uploadArchives {
             pom.groupId = 'engineer.echo'
             pom.artifactId = 'happymaven'
             pom.version = '0.0.1'
-
-            //方式一：发布到 指定文件夹 比如 绝对路径`D:/repos` 相对路径`../localPublish`
             repository(url: uri('../localPublish'))
-
-            //方式二：发布到 Maven仓库 比如 Sonatype Nexus
-//            repository(url: uri('http://localhost:8081/nexus/content/repositories/thirdparty/')) {
-//                authentication(userName: "admin", password: "admin123")
-//            }
         }
     }
 }

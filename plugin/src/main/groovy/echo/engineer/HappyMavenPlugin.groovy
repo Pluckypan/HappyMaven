@@ -15,10 +15,9 @@ class HappyMavenPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         // 0. runtime check
-        def hasApp = project.plugins.findPlugin("com.android.application")
         def hasLib = project.plugins.findPlugin("com.android.library")
-        if (!hasApp && !hasLib) {
-            throw new IllegalStateException("'android' or 'android-library' plugin required.")
+        if (!hasLib) {
+            throw new IllegalStateException(" 'android-library' plugin required.")
         }
 
         // 1. create HappyMaven extension
@@ -54,6 +53,7 @@ class HappyMavenPlugin implements Plugin<Project> {
             if (!config.packaging) {
                 throw new IllegalStateException("packaging is nil.")
             }
+            HappyPublish.publish(project,config)
             println("\n****************** HappyMaven ******************")
         }
     }
