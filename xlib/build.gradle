@@ -52,7 +52,4 @@ HappyMaven {
     version = "0.0.2-SNAPSHOT"
 
     packaging = "aar"
-    //Repo
-    releaseRepoUrl = "../localPublish"
-    snapshotRepoUrl = "../localPublish"
 }

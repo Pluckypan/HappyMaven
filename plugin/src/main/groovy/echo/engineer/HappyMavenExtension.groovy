@@ -38,7 +38,7 @@ class HappyMavenExtension {
     String developerName
 
     boolean isReleaseBuild() {
-        return version && !version.contains("SNAPSHOT")
+        return version && !version.toUpperCase().contains("SNAPSHOT")
     }
 
     @Override

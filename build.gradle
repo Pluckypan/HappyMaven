@@ -26,6 +26,20 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+//Happy Maven Global config,all libraries share the common config
 ext.HappyMaven = [
+
+        /** remote url & account
+         "RELEASE_REPO_URL": "http://localhost:8081/nexus/content/repositories/releases/",
+         "SNAPSHOT_REPO_URL": "http://localhost:8081/nexus/content/repositories/snapshots/",
+         "NEXUS_USER_NAME": "admin",
+         "NEXUS_PASSWORD": "admin123"
+         */
+
+        /**
+         * local directory
+         */
+        "RELEASE_REPO_URL": "../localPublish",
+        "SNAPSHOT_REPO_URL": "../localPublish",
 
 ]
