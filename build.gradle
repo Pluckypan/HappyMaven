@@ -36,6 +36,16 @@ def localProperties(key, defaultVal) {
     }
 }
 
+def getPropertyVal(key) {
+    if (System.getProperty(key)) {
+        return System.getProperty(key)
+    } else if (project.hasProperty(key)) {
+        return project.getProperty(key)
+    } else {
+        return null
+    }
+}
+
 ext.LOCAL = localProperties("LOCAL", "true")
 
 //Happy Maven Global config,all libraries share the common config
