@@ -1,7 +1,13 @@
 # HappyMaven
 > Provide an easy way to publish your library(AARS or JARS) to Maven repositories
 
-### full module config in library `build.gradle`
+### I.features
+- jcenter()       [bintray](https://bintray.com/)
+- mavenCentral()  [maven](https://issues.sonatype.org)
+
+### II.usage
+
+### III.full module config in library `build.gradle`
 
 ```
 apply plugin: 'happy-maven'
@@ -27,7 +33,7 @@ HappyMaven {
     pomDesc = "Easy to publish android library."
     pomUrl = "https://github.com/Pluckypan/HappyMaven"
     //Scm
-    scmUrl = "https://github.com/Pluckypan/HappyMaven"
+    scmUrl = "https://github.com/Pluckypan/HappyMaven.git"
     scmConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
     scmDevConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
     //License
@@ -40,7 +46,7 @@ HappyMaven {
 }
 ```
 
-### full global config in rootProject `build.gradle`
+### IIII.full global config in rootProject `build.gradle`
 
 ```
 ext.HappyMaven = [
@@ -63,7 +69,7 @@ ext.HappyMaven = [
         "POM_DESC": "Easy to publish android library.",
         "POM_URL": "https://github.com/Pluckypan/HappyMaven",
 
-        "SCM_URL": "https://github.com/Pluckypan/HappyMaven",
+        "SCM_URL": "https://github.com/Pluckypan/HappyMaven.git",
         "SCM_CONNECTION": "scm:git@github.com:Pluckypan/HappyMaven.git",
         "SCM_DEV_CONNECTION": "scm:git@github.com:Pluckypan/HappyMaven.git",
 
@@ -76,5 +82,4 @@ ext.HappyMaven = [
 ]
 ```
 
-### usage
-### thanks
+### X.thanks

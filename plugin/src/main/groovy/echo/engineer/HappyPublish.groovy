@@ -30,7 +30,11 @@ class HappyPublish {
             exclude '**/internal/*'
 
             // Append Java 7, Android references and docs.
-            options.links("http://docs.oracle.com/javase/7/docs/api/");
+            options.version(true)
+            options.author(true)
+            options.charSet("UTF-8")
+            options.docEncoding("UTF-8")
+            options.links("http://docs.oracle.com/javase/7/docs/api/")
             options.linksOffline "https://developer.android.com/reference", "${project.android.sdkDirectory}/docs/reference"
         }
         project.task('androidJavadocsJar', type: Jar, dependsOn: 'androidJavadocs') {
