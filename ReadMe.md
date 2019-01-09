@@ -3,9 +3,13 @@
 
 ### I.features
 1. jcenter()       [bintray](https://bintray.com/)
+   - **not support yet.coming soon**
+   - search `https://bintray.com/search?query=happymaven`
 2. mavenCentral()  [maven](https://issues.sonatype.org)
    - release url `https://oss.sonatype.org/service/local/staging/deploy/maven2/`
    - snapshot url `https://oss.sonatype.org/content/repositories/snapshots/`
+   - search your library `https://search.maven.org/`
+   - more help -> [中文](https://my.oschina.net/songxinqiang/blog/313226)
 
 ### II.usage
 you can define your personal secret key In your `~/.gradle/gradle.properties` like
