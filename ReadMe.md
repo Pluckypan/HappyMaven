@@ -2,10 +2,19 @@
 > Provide an easy way to publish your library(AARS or JARS) to Maven repositories
 
 ### I.features
-- jcenter()       [bintray](https://bintray.com/)
-- mavenCentral()  [maven](https://issues.sonatype.org)
+1. jcenter()       [bintray](https://bintray.com/)
+2. mavenCentral()  [maven](https://issues.sonatype.org)
+   - release url `https://oss.sonatype.org/service/local/staging/deploy/maven2/`
+   - snapshot url `https://oss.sonatype.org/content/repositories/snapshots/`
 
 ### II.usage
+you can define your personal secret key In your `~/.gradle/gradle.properties` like
+
+```
+NEXUS_USER_NAME = yourUsername
+NEXUS_PASSWORD = yourPassword
+```
+
 
 ### III.full module config in library `build.gradle`
 

@@ -26,6 +26,18 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+def localProperties(key, defaultVal) {
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties.getProperty(key, defaultVal)
+    } else {
+        return null
+    }
+}
+
+ext.LOCAL = localProperties("LOCAL", "true")
+
 //Happy Maven Global config,all libraries share the common config
 ext.HappyMaven = [
 
@@ -39,7 +51,7 @@ ext.HappyMaven = [
         /**
          * local directory
          */
-        "RELEASE_REPO_URL": "../localPublish",
+        "RELEASE_REPO_URL" : "../localPublish",
         "SNAPSHOT_REPO_URL": "../localPublish",
 
 ]

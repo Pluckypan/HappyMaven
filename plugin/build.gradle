@@ -16,7 +16,14 @@ uploadArchives {
             pom.groupId = 'engineer.echo'
             pom.artifactId = 'happymaven'
             pom.version = '0.0.1'
-            repository(url: uri('../localPublish'))
+            println("upload local=$LOCAL user=$NEXUS_USER_NAME")
+            if (NEXUS_USER_NAME && NEXUS_PASSWORD && LOCAL == "false") {
+                repository(url: uri('https://oss.sonatype.org/service/local/staging/deploy/maven2/')) {
+                    authentication(userName: NEXUS_USER_NAME, password: NEXUS_PASSWORD)
+                }
+            } else {
+                repository(url: uri('../localPublish'))
+            }
         }
     }
 }
