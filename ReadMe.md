@@ -9,15 +9,25 @@
    - release url `https://oss.sonatype.org/service/local/staging/deploy/maven2/`
    - snapshot url `https://oss.sonatype.org/content/repositories/snapshots/`
    - search your library `https://search.maven.org/`
-   - more help -> [中文](https://my.oschina.net/songxinqiang/blog/313226)
+   - more help -> [中文](https://my.oschina.net/songxinqiang/blog/313226) [sonatype issue](http://www.echo.engineer/c/sonatype.html)
 
 ### II.usage
-you can define your personal secret key In your `~/.gradle/gradle.properties` like
+#### you can define your personal secret key In your `~/.gradle/gradle.properties` like
 
 ```
 NEXUS_USER_NAME = yourUsername
 NEXUS_PASSWORD = yourPassword
+signing.keyId=gpg secret key id like B1855705
+signing.password=gpg key password
+signing.secretKeyRingFile=/Users/your name/.gnupg/secring.gpg
 ```
+
+#### gen gpg secret key (Mac)
+- brew install gnupg 
+- or download dmg form http://www.gpgtools.org/
+- test gpg `gpg --help`
+- gen key `gpg --full-generate-key`
+- output secret key: `gpg -o .gnupg/secring.gpg  --export-secret-keys`
 
 
 ### III.full module config in library `build.gradle`
