@@ -28,6 +28,8 @@ signing.secretKeyRingFile=/Users/your name/.gnupg/secring.gpg
 - test gpg `gpg --help`
 - gen key `gpg --full-generate-key`
 - output secret key: `gpg -o .gnupg/secring.gpg  --export-secret-keys`
+- send publish key `gpg --keyserver  http://pool.sks-keyservers.net:11371/ --send-keys B1855705`
+  or `gpg --keyserver http://keyserver.ubuntu.com:11371/ --send-keys B1855705`
 
 
 ### III.full module config in library `build.gradle`
