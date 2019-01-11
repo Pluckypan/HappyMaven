@@ -17,10 +17,6 @@ class HappyMavenExtension {
     String snapshotRepoUrl
     String nexusUserName
     String nexusPassword
-    //Sign
-    String signKeyId
-    String signPassword
-    String signFile
     //Pom
     String pomName
     String pomDesc

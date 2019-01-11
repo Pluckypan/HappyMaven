@@ -9,7 +9,7 @@
    - release url `https://oss.sonatype.org/service/local/staging/deploy/maven2/`
    - snapshot url `https://oss.sonatype.org/content/repositories/snapshots/`
    - search your library `https://search.maven.org/`
-   - more help -> [中文](https://my.oschina.net/songxinqiang/blog/313226) [sonatype issue](http://www.echo.engineer/c/sonatype.html)
+   - more help -> [发布Maven构件到中央仓库](https://my.oschina.net/songxinqiang/blog/313226) &  [sonatype issue](http://www.echo.engineer/c/sonatype.html)
 
 ### II.usage
 #### you can define your personal secret key In your `~/.gradle/gradle.properties` like
@@ -49,10 +49,6 @@ HappyMaven {
     snapshotRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
     nexusUserName = "plucky"
     nexusPassword = "xxxxxx"
-    //Sign
-    signKeyId = "xxx"
-    signPassword = "xxxxxx"
-    signFile = "~/.gradle/xxx"
     //Pom
     pomName = "HappyMaven"
     pomDesc = "Easy to publish android library."
@@ -85,10 +81,6 @@ ext.HappyMaven = [
         "SNAPSHOT_REPO_URL": "https://oss.sonatype.org/content/repositories/snapshots/",
         "NEXUS_USER_NAME": "plucky",
         "NEXUS_PASSWORD": "xxxxxx",
-
-        "SIGN_KEY_ID": "xxx",
-        "SIGN_PASSWORD": "xxxxxx",
-        "SIGN_FILE": "~/.gradle/xxx",
 
         "POM_NAME": "HappyMaven",
         "POM_DESC": "Easy to publish android library.",

@@ -35,10 +35,6 @@ class HappyParser {
         config.nexusUserName = global["NEXUS_USER_NAME"]
         config.nexusPassword = global["NEXUS_PASSWORD"]
 
-        config.signKeyId = global["SIGN_KEY_ID"]
-        config.signPassword = global["SIGN_PASSWORD"]
-        config.signFile = global["SIGN_FILE"]
-
         config.pomName = pName
         config.pomDesc = global["POM_DESC"]
         config.pomUrl = global["POM_URL"]
@@ -92,16 +88,6 @@ class HappyParser {
         }
         if (module.nexusPassword) {
             config.nexusPassword = module.nexusPassword
-        }
-        // SIGN
-        if (module.signKeyId) {
-            config.signKeyId = module.signKeyId
-        }
-        if (module.signPassword) {
-            config.signPassword = module.signPassword
-        }
-        if (module.signFile) {
-            config.signFile = module.signFile
         }
         // POM
         if (module.pomName) {
