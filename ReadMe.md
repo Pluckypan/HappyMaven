@@ -11,7 +11,7 @@
             mavenCentral()
         }
         dependencies {
-            classpath 'engineer.echo:happymaven:0.0.1'
+            classpath 'engineer.echo:happymaven:0.0.2'
         }
     }
     ```
@@ -56,7 +56,8 @@
     ```
 
 5. upload archives
- ![upload archives](image/upload_archives.png)
+
+![upload archives](image/upload_archives.png)
 
 ### Ⅱ.Reference Documents
 1. mavenCentral()  [maven](https://issues.sonatype.org)
@@ -86,7 +87,7 @@
 ext.HappyMaven = [
         "GROUP_ID": "engineer.echo",
         "ARTIFACT_ID": "happymaven",
-        "VERSION": "0.0.1",
+        "VERSION": "0.0.2",
 
         "PACKAGING": "aar",
 
@@ -120,7 +121,7 @@ apply plugin: 'happy-maven'
 HappyMaven {
     groupId = "engineer.echo"
     artifactId = "happymaven"
-    version = "0.0.1"
+    version = "0.0.2"
 
     packaging = "aar"
     
