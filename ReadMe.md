@@ -23,8 +23,8 @@ signing.secretKeyRingFile=/Users/your name/.gnupg/secring.gpg
 ```
 
 #### gen gpg secret key (Mac)
-- brew install gnupg 
-- or download dmg form http://www.gpgtools.org/
+- `brew install gnupg `
+- or download dmg form [http://www.gpgtools.org/](http://www.gpgtools.org/)
 - test gpg `gpg --help`
 - gen key `gpg --full-generate-key`
 - output secret key: `gpg -o .gnupg/secring.gpg  --export-secret-keys`
