@@ -57,8 +57,8 @@ class HappyParser {
         config.developerName = dName
 
         if (showLog) {
-            println("\n---Root Config---")
-            println(String.format("GROUP_ID=%s\nARTIFACT_ID=%s\nVERSION=%s\nPACKAGING=%s\nPOM_NAME=%s\nLICENSE_NAME=%s\nDEVELOPER_ID=%s\nDEVELOPER_NAME=%s\nRELEASE_REPO_URL=%s\nNEXUS_USER_NAME(project,final)=(%s,%s)]", gId, aId, version, pack, pName, lName, dId, dName, repo, user, config.nexusUserName))
+            println("\n----Root Config----")
+            println(String.format("GROUP_ID=%s\nARTIFACT_ID=%s\nVERSION=%s\nPACKAGING=%s\nPOM_NAME=%s\nLICENSE_NAME=%s\nDEVELOPER_ID=%s\nDEVELOPER_NAME=%s\nRELEASE_REPO_URL=%s\nNEXUS_USER_NAME(project,final)=(%s,%s)", gId, aId, version, pack, pName, lName, dId, dName, repo, user, config.nexusUserName))
         }
     }
 
@@ -69,7 +69,7 @@ class HappyParser {
      */
     static void parseModuleConfig(HappyMavenExtension module, HappyMavenExtension config, boolean showLog) {
         if (showLog) {
-            println("\n---Module Config---")
+            println("\n----Module Config----")
             println(module)
         }
         // Main
@@ -135,6 +135,16 @@ class HappyParser {
         }
         if (module.developerName) {
             config.developerName = module.developerName
+        }
+    }
+
+    static String getPropertyVal(project, key) {
+        if (System.getProperty(key)) {
+            return System.getProperty(key)
+        } else if (project.hasProperty(key)) {
+            return project.getProperty(key)
+        } else {
+            return null
         }
     }
 }

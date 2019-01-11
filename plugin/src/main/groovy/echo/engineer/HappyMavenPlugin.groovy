@@ -33,12 +33,12 @@ class HappyMavenPlugin implements Plugin<Project> {
             // 3. final config
             def config = new HappyMavenExtension()
             // read system or project properties by default
-            config.nexusUserName = getPropertyVal(project, "NEXUS_USER_NAME")
-            config.nexusPassword = getPropertyVal(project, "NEXUS_PASSWORD")
+            config.nexusUserName = HappyParser.getPropertyVal(project, "NEXUS_USER_NAME")
+            config.nexusPassword = HappyParser.getPropertyVal(project, "NEXUS_PASSWORD")
             def showLog = project.name && project.name.length() > 0
             if (showLog) {
-                println("****************** HappyMaven ******************")
-                println("\nCurrent Project:${project.name}")
+                println("\n****************** HappyMaven Start ******************")
+                println("Current Project:${project.name}")
             }
             if (global) {
                 HappyParser.parseRootConfig(global, config, showLog)
@@ -47,7 +47,7 @@ class HappyMavenPlugin implements Plugin<Project> {
                 HappyParser.parseModuleConfig(extension, config, showLog)
             }
             if (showLog) {
-                println("\n---Final Config---")
+                println("\n----Final Config----")
                 println(config)
             }
             if (!config.groupId) {
@@ -64,18 +64,8 @@ class HappyMavenPlugin implements Plugin<Project> {
             }
             HappyPublish.publish(project, config, showLog)
             if (showLog) {
-                println("\n****************** HappyMaven ******************")
+                println("\n****************** HappyMaven End  ******************\n")
             }
-        }
-    }
-
-    private static String getPropertyVal(project, key) {
-        if (System.getProperty(key)) {
-            return System.getProperty(key)
-        } else if (project.hasProperty(key)) {
-            return project.getProperty(key)
-        } else {
-            return null
         }
     }
 }

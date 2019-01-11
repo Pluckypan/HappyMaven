@@ -6,7 +6,7 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.javadoc.Javadoc
 
 class HappyPublish {
-    static void publish(Project project, HappyMavenExtension config,boolean showLog) {
+    static void publish(Project project, HappyMavenExtension config, boolean showLog) {
         project.apply plugin: 'maven'
         project.apply plugin: 'signing'
 
@@ -50,7 +50,31 @@ class HappyPublish {
         project.uploadArchives {
             repositories {
                 mavenDeployer {
-                    beforeDeployment { MavenDeployment deployment -> project.signing.signPom(deployment) }
+                    beforeDeployment { MavenDeployment deployment ->
+                        if (!config.isReleaseBuild()) return
+                        def _id = HappyParser.getPropertyVal(project, "signing.keyId")
+                        def _pwd = HappyParser.getPropertyVal(project, "signing.password")
+                        def _ring = HappyParser.getPropertyVal(project, "signing.secretKeyRingFile")
+                        if (!_id) {
+                            if (showLog) {
+                                project.logger.error("****************** signing.keyId is nil ******************")
+                            }
+                            return
+                        }
+                        if (!_pwd) {
+                            if (showLog) {
+                                project.logger.error("****************** signing.password is nil ******************")
+                            }
+                            return
+                        }
+                        if (!_ring|| !new File(_ring).exists()) {
+                            if (showLog) {
+                                project.logger.error("****************** signing.secretKeyRingFile not exists ******************")
+                            }
+                            return
+                        }
+                        project.signing.signPom(deployment)
+                    }
 
                     pom.groupId = config.groupId
                     pom.artifactId = config.artifactId
