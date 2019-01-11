@@ -40,10 +40,9 @@ buildscript {
         classpath 'engineer.echo:happymaven:0.0.1'
     }
 }
-//apply plugin: 'happy-maven'
-//
-//HappyMaven {
-//    //Main
-//    artifactId = "ylib"
-//    version = "0.0.1"
-//}
+apply plugin: 'happy-maven'
+
+HappyMaven {
+    artifactId = "ylib"
+    version = "0.0.1"
+}

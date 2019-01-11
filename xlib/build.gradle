@@ -46,8 +46,6 @@ buildscript {
 apply plugin: 'happy-maven'
 
 HappyMaven {
-    //Main
-    groupId = "engineer.echo"
     artifactId = "xlib"
     version = "0.0.2-SNAPSHOT"
 
