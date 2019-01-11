@@ -32,15 +32,24 @@ class HappyMavenPlugin implements Plugin<Project> {
             }
             // 3. final config
             def config = new HappyMavenExtension()
-            println("****************** HappyMaven ******************")
+            // read system or project properties by default
+            config.nexusUserName = getPropertyVal(project, "NEXUS_USER_NAME")
+            config.nexusPassword = getPropertyVal(project, "NEXUS_PASSWORD")
+            def showLog = project.name && project.name.length() > 0
+            if (showLog) {
+                println("****************** HappyMaven ******************")
+                println("\nCurrent Project:${project.name}")
+            }
             if (global) {
-                HappyParser.parseRootConfig(global, config)
+                HappyParser.parseRootConfig(global, config, showLog)
             }
             if (extension) {
-                HappyParser.parseModuleConfig(extension, config)
+                HappyParser.parseModuleConfig(extension, config, showLog)
             }
-            println("\n---Final Config---")
-            println(config)
+            if (showLog) {
+                println("\n---Final Config---")
+                println(config)
+            }
             if (!config.groupId) {
                 throw new IllegalStateException("groupId is nil.")
             }
@@ -53,8 +62,20 @@ class HappyMavenPlugin implements Plugin<Project> {
             if (!config.packaging) {
                 throw new IllegalStateException("packaging is nil.")
             }
-            HappyPublish.publish(project,config)
-            println("\n****************** HappyMaven ******************")
+            HappyPublish.publish(project, config, showLog)
+            if (showLog) {
+                println("\n****************** HappyMaven ******************")
+            }
+        }
+    }
+
+    private static String getPropertyVal(project, key) {
+        if (System.getProperty(key)) {
+            return System.getProperty(key)
+        } else if (project.hasProperty(key)) {
+            return project.getProperty(key)
+        } else {
+            return null
         }
     }
 }

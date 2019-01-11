@@ -6,7 +6,7 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.javadoc.Javadoc
 
 class HappyPublish {
-    static void publish(Project project, HappyMavenExtension config) {
+    static void publish(Project project, HappyMavenExtension config,boolean showLog) {
         project.apply plugin: 'maven'
         project.apply plugin: 'signing'
 

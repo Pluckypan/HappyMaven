@@ -13,7 +13,7 @@ class HappyParser {
  * @param global : rootProject config. from `ext.HappyMaven=[]` in `build.gradle`
  * @param config : final config
  */
-    static void parseRootConfig(global, HappyMavenExtension config) {
+    static void parseRootConfig(global, HappyMavenExtension config, boolean showLog) {
         def gId = global["GROUP_ID"]
         def aId = global["ARTIFACT_ID"]
         def version = global["VERSION"]
@@ -23,6 +23,8 @@ class HappyParser {
         def pName = global["POM_NAME"]
         def lName = global["LICENSE_NAME"]
         def repo = global["RELEASE_REPO_URL"]
+        def user = global["NEXUS_USER_NAME"]
+        def pwd = global["NEXUS_PASSWORD"]
         //apply root config
         config.groupId = gId
         config.artifactId = aId
@@ -32,8 +34,12 @@ class HappyParser {
 
         config.releaseRepoUrl = repo
         config.snapshotRepoUrl = global["SNAPSHOT_REPO_URL"]
-        config.nexusUserName = global["NEXUS_USER_NAME"]
-        config.nexusPassword = global["NEXUS_PASSWORD"]
+        if (user) {
+            config.nexusUserName = user
+        }
+        if (pwd) {
+            config.nexusPassword = pwd
+        }
 
         config.pomName = pName
         config.pomDesc = global["POM_DESC"]
@@ -50,8 +56,10 @@ class HappyParser {
         config.developerId = dId
         config.developerName = dName
 
-        println("\n---Root Config---")
-        println(String.format("GROUP_ID=%s\nARTIFACT_ID=%s\nVERSION=%s\nPACKAGING=%s\nPOM_NAME=%s\nLICENSE_NAME=%s\nDEVELOPER_ID=%s\nDEVELOPER_NAME=%s\nRELEASE_REPO_URL=%s]", gId, aId, version, pack, pName, lName, dId, dName, repo))
+        if (showLog) {
+            println("\n---Root Config---")
+            println(String.format("GROUP_ID=%s\nARTIFACT_ID=%s\nVERSION=%s\nPACKAGING=%s\nPOM_NAME=%s\nLICENSE_NAME=%s\nDEVELOPER_ID=%s\nDEVELOPER_NAME=%s\nRELEASE_REPO_URL=%s\nNEXUS_USER_NAME(project,final)=(%s,%s)]", gId, aId, version, pack, pName, lName, dId, dName, repo, user, config.nexusUserName))
+        }
     }
 
     /**
@@ -59,9 +67,11 @@ class HappyParser {
      * @param module : module config. from `HappyMaven{}` in `build.gradle`
      * @param config : final config
      */
-    static void parseModuleConfig(HappyMavenExtension module, HappyMavenExtension config) {
-        println("\n---Module Config---")
-        println(module)
+    static void parseModuleConfig(HappyMavenExtension module, HappyMavenExtension config, boolean showLog) {
+        if (showLog) {
+            println("\n---Module Config---")
+            println(module)
+        }
         // Main
         if (module.groupId) {
             config.groupId = module.groupId
