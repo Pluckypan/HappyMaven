@@ -32,3 +32,23 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+buildscript {
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/content/groups/public"
+        }
+    }
+    dependencies {
+        classpath 'engineer.echo:happymaven:0.0.1'
+    }
+}
+apply plugin: 'happy-maven'
+
+HappyMaven {
+    //Main
+    groupId = "engineer.echo"
+    artifactId = "ylib"
+    version = "0.0.1-SNAPSHOT"
+
+    packaging = "aar"
+}
