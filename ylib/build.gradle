@@ -34,9 +34,7 @@ dependencies {
 }
 buildscript {
     repositories {
-        maven {
-            url "https://oss.sonatype.org/content/groups/public"
-        }
+        mavenCentral()
     }
     dependencies {
         classpath 'engineer.echo:happymaven:0.0.1'
@@ -46,9 +44,6 @@ apply plugin: 'happy-maven'
 
 HappyMaven {
     //Main
-    groupId = "engineer.echo"
     artifactId = "ylib"
-    version = "0.0.1-SNAPSHOT"
-
-    packaging = "aar"
+    version = "0.0.1"
 }
