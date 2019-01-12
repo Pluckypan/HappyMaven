@@ -1,6 +1,11 @@
 # HappyMaven
 > Provide an easy way to publish your archives(AARS or JARS) to Maven Central
 
+![](https://img.shields.io/github/license/Pluckypan/HappyMaven.svg?style=plastic)
+[![Maven Central](https://img.shields.io/maven-central/v/engineer.echo/happymaven.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22engineer.echo%22%20AND%20a:%22happymaven%22)
+![](https://img.shields.io/github/last-commit/pluckypan/happymaven.svg)
+![](https://img.shields.io/badge/author-plucky-green.svg)
+
 ### Ⅰ.Quick Start
 
 1. dependence happymaven
@@ -57,7 +62,7 @@
 
 5. upload archives
 
-![upload archives](image/upload_archives.png)
+ ![upload archives](image/upload_archives.png)
 
 ### Ⅱ.Reference Documents
 1. mavenCentral()  [maven](https://issues.sonatype.org)
@@ -145,4 +150,22 @@ HappyMaven {
     developerId = "pluckypan"
     developerName = "Plucky Pan"
 }
+```
+
+Ⅴ. License
+
+```
+Copyright [2019] [Plucky Pan]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```

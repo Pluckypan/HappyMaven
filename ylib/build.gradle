@@ -37,7 +37,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'engineer.echo:happymaven:0.0.1'
+        classpath 'engineer.echo:happymaven:0.0.2'
     }
 }
 apply plugin: 'happy-maven'
@@ -45,4 +45,12 @@ apply plugin: 'happy-maven'
 HappyMaven {
     artifactId = "ylib"
     version = "0.0.1"
+
+    pomName = "YLib"
+    pomDesc = "HappyMaven test library"
+    pomUrl = "https://github.com/Pluckypan/HappyMaven"
+
+    scmUrl = "https://github.com/Pluckypan/HappyMaven.git"
+    scmConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
+    scmDevConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
 }
