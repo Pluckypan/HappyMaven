@@ -1,7 +1,6 @@
 package echo.engineer.happymaven
 
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**
