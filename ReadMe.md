@@ -154,6 +154,7 @@ HappyMaven {
 
 V. TODO
 - [ ] 中文乱码 HappyPublish.groovy:19
+- [ ] WARNING: API 'variant.getJavaCompile()' is obsolete and has been replaced with 'variant.getJavaCompileProvider()'.
 
 Ⅵ. License
 
