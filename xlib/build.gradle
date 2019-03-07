@@ -40,7 +40,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'engineer.echo:happymaven:0.0.2'
+        classpath 'engineer.echo:happymaven:0.0.3'
     }
 }
 apply plugin: 'happy-maven'
@@ -48,6 +48,7 @@ apply plugin: 'happy-maven'
 HappyMaven {
     artifactId = "xlib"
     version = "0.0.2-SNAPSHOT"
-
+    releaseRepoUrl = "./build/publish/"
+    snapshotRepoUrl = "./build/publish/"
     packaging = "aar"
 }

@@ -22,12 +22,14 @@ class HappyPublish {
             failOnError true
             // Append also the classpath and files for release library variants. This fixes the javadoc warnings.
             // Got it from here - https://github.com/novoda/bintray-release/pull/39/files
-            def releaseVariant = project.android.libraryVariants.toList().first()
-            classpath += releaseVariant.javaCompile.classpath
-            classpath += releaseVariant.javaCompile.outputs.files
+            // def releaseVariant = project.android.libraryVariants.toList().first()
+            // classpath += releaseVariant.javaCompile.classpath
+            // classpath += releaseVariant.javaCompile.outputs.files
 
             // We don't need javadoc for internals.
             exclude '**/internal/*'
+            exclude '**/BuildConfig.java'
+            exclude '**/R.java'
 
             // Append Java 7, Android references and docs.
             options.version(true)
@@ -40,6 +42,11 @@ class HappyPublish {
         project.task('androidJavadocsJar', type: Jar, dependsOn: 'androidJavadocs') {
             classifier = 'javadoc'
             from project.tasks.androidJavadocs.destinationDir
+        }
+        // gen JavaDoc chinese word error
+        project.tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+            options.addStringOption('encoding', 'UTF-8')
         }
         project.artifacts {
             archives project.tasks.androidSourcesJar
@@ -67,7 +74,7 @@ class HappyPublish {
                             }
                             return
                         }
-                        if (!_ring|| !new File(_ring).exists()) {
+                        if (!_ring || !new File(_ring).exists()) {
                             if (showLog) {
                                 project.logger.error("****************** signing.secretKeyRingFile not exists ******************")
                             }

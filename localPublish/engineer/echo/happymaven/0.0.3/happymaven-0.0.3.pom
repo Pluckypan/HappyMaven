@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>engineer.echo</groupId>
   <artifactId>happymaven</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <name>HappyMaven</name>
-  <description>Provide an easy way to publish your library(AARS or JARS) to Maven repositories</description>
+  <description>Provide an easy way to publish your archives(AARS or JARS) to Maven repositories</description>
   <url>https://github.com/Pluckypan/HappyMaven</url>
   <licenses>
     <license>

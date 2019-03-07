@@ -53,4 +53,6 @@ HappyMaven {
     scmUrl = "https://github.com/Pluckypan/HappyMaven.git"
     scmConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
     scmDevConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
+    releaseRepoUrl = "./build/publish/"
+    snapshotRepoUrl = "./build/publish/"
 }
