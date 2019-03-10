@@ -16,7 +16,7 @@
             mavenCentral()
         }
         dependencies {
-            classpath 'engineer.echo:happymaven:0.0.2'
+            classpath 'engineer.echo:happymaven:0.0.3'
         }
     }
     ```
@@ -92,7 +92,7 @@
 ext.HappyMaven = [
         "GROUP_ID": "engineer.echo",
         "ARTIFACT_ID": "happymaven",
-        "VERSION": "0.0.2",
+        "VERSION": "0.0.3",
 
         "PACKAGING": "aar",
 
@@ -153,8 +153,8 @@ HappyMaven {
 ```
 
 V. TODO
-- [ ] 中文乱码 HappyPublish.groovy:19
-- [ ] WARNING: API 'variant.getJavaCompile()' is obsolete and has been replaced with 'variant.getJavaCompileProvider()'.
+- [x] 中文乱码 HappyPublish.groovy:19
+- [x] WARNING: API 'variant.getJavaCompile()' is obsolete and has been replaced with 'variant.getJavaCompileProvider()'.
 
 Ⅵ. License
 
