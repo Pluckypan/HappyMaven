@@ -63,6 +63,12 @@
 5. upload archives
 
  ![upload archives](image/upload_archives.png)
+ 
+ or run 
+ 
+ ```
+ ./gradlew ylib:uploadArchives
+ ```
 
 ### Ⅱ.Reference Documents
 1. mavenCentral()  [maven](https://issues.sonatype.org)
