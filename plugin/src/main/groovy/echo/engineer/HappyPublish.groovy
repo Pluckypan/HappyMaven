@@ -1,6 +1,7 @@
 package echo.engineer
 
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.artifacts.maven.MavenDeployment
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.javadoc.Javadoc
@@ -20,16 +21,26 @@ class HappyPublish {
             source = project.android.sourceSets.main.java.srcDirs
             classpath += project.files(project.android.getBootClasspath().join(File.pathSeparator))
             failOnError true
-            // Append also the classpath and files for release library variants. This fixes the javadoc warnings.
-            // Got it from here - https://github.com/novoda/bintray-release/pull/39/files
-            // def releaseVariant = project.android.libraryVariants.toList().first()
-            // classpath += releaseVariant.javaCompile.classpath
-            // classpath += releaseVariant.javaCompile.outputs.files
+
+            def aa=project.android.libraryVariants.toList().first()
+            Task javaCompileTask
+            if (aa.hasProperty('javaCompileProvider')) {
+                // Android 3.3.0+
+                javaCompileTask = aa.javaCompileProvider.get()
+            } else {
+                // Older Android
+                javaCompileTask = aa.javaCompile
+            }
+            if (javaCompileTask!=null){
+                classpath += javaCompileTask.classpath
+                classpath += javaCompileTask.outputs.files
+            }
 
             // We don't need javadoc for internals.
             exclude '**/internal/*'
             exclude '**/BuildConfig.java'
             exclude '**/R.java'
+            exclude '**/R.html', '**/R.*.html', '**/index.html', '**/*.kt'
 
             // Append Java 7, Android references and docs.
             options.version(true)
