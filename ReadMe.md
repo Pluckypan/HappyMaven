@@ -16,7 +16,7 @@
             mavenCentral()
         }
         dependencies {
-            classpath 'engineer.echo:happymaven:0.0.3'
+            classpath 'engineer.echo:happymaven:0.0.4'
         }
     }
     ```
@@ -98,7 +98,7 @@
 ext.HappyMaven = [
         "GROUP_ID": "engineer.echo",
         "ARTIFACT_ID": "happymaven",
-        "VERSION": "0.0.3",
+        "VERSION": "0.0.4",
 
         "PACKAGING": "aar",
 
@@ -132,7 +132,7 @@ apply plugin: 'happy-maven'
 HappyMaven {
     groupId = "engineer.echo"
     artifactId = "happymaven"
-    version = "0.0.2"
+    version = "0.0.4"
 
     packaging = "aar"
     
