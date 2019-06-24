@@ -22,14 +22,14 @@ class HappyPublish {
             classpath += project.files(project.android.getBootClasspath().join(File.pathSeparator))
             failOnError true
 
-            def aa=project.android.libraryVariants.toList().first()
+            def variant=project.android.libraryVariants.toList().first()
             Task javaCompileTask
             if (aa.hasProperty('javaCompileProvider')) {
                 // Android 3.3.0+
-                javaCompileTask = aa.javaCompileProvider.get()
+                javaCompileTask = variant.javaCompileProvider.get()
             } else {
                 // Older Android
-                javaCompileTask = aa.javaCompile
+                javaCompileTask = variant.javaCompile
             }
             if (javaCompileTask!=null){
                 classpath += javaCompileTask.classpath
