@@ -15,9 +15,11 @@ class HappyMavenPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         // 0. runtime check
-        def hasLib = project.plugins.findPlugin("com.android.library")
+        def androidLib = project.plugins.findPlugin("com.android.library")
+        def javaLib = project.plugins.findPlugin("java-library")
+        def hasLib = androidLib || javaLib
         if (!hasLib) {
-            throw new IllegalStateException(" 'android-library' plugin required.")
+            throw new IllegalStateException(" 'com.android.library' or `java-library` plugin required.")
         }
 
         // 1. create HappyMaven extension
