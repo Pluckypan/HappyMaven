@@ -37,20 +37,11 @@ class HappyMavenPlugin implements Plugin<Project> {
             // read system or project properties by default
             config.nexusUserName = HappyParser.getPropertyVal(project, "NEXUS_USER_NAME")
             config.nexusPassword = HappyParser.getPropertyVal(project, "NEXUS_PASSWORD")
-            def showLog = project.name && project.name.length() > 0
-            if (showLog) {
-                println("\n****************** HappyMaven Start ******************")
-                println("Current Project:${project.name}")
-            }
             if (global) {
-                HappyParser.parseRootConfig(global, config, showLog)
+                HappyParser.parseRootConfig(global, config)
             }
             if (extension) {
-                HappyParser.parseModuleConfig(extension, config, showLog)
-            }
-            if (showLog) {
-                println("\n----Final Config----")
-                println(config)
+                HappyParser.parseModuleConfig(extension, config)
             }
             if (!config.groupId) {
                 throw new IllegalStateException("groupId is nil.")
@@ -64,10 +55,18 @@ class HappyMavenPlugin implements Plugin<Project> {
             if (!config.packaging) {
                 throw new IllegalStateException("packaging is nil.")
             }
-            HappyPublish.publish(project, config, showLog)
-            if (showLog) {
-                println("\n****************** HappyMaven End  ******************\n")
+            HappyPublish.publish(project, config, androidLib != null)
+        }
+
+        def uploadLib = project.tasks.create('uploadLib') {
+            doLast {
+                project.tasks.uploadArchives.execute()
             }
+        }
+
+        project.configure(uploadLib) {
+            group = "HappyMaven"
+            description = 'upload current Library to Maven'
         }
     }
 }

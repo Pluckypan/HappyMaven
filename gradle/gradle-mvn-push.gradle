@@ -25,24 +25,46 @@ def isReleaseBuild() {
 }
 
 def getReleaseRepositoryUrl() {
-    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
-            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+    return getPropertyVal('RELEASE_REPOSITORY_URL', "https://oss.sonatype.org/service/local/staging/deploy/maven2/")
 }
 
 def getSnapshotRepositoryUrl() {
-    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
-            : "https://oss.sonatype.org/content/repositories/snapshots/"
+    return getPropertyVal('SNAPSHOT_REPOSITORY_URL', "https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 def getRepositoryUsername() {
-    return hasProperty('NEXUS_USER_NAME') ? NEXUS_USER_NAME : ""
+    return getPropertyVal('NEXUS_USER_NAME')
 }
 
 def getRepositoryPassword() {
-    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+    return getPropertyVal('NEXUS_PASSWORD')
+}
+
+def localProperties(key, defaultVal) {
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties.getProperty(key, defaultVal)
+    } else {
+        return null
+    }
+}
+
+def getPropertyVal(key, defVal = "") {
+    def local = localProperties(key, defVal)
+    if (local != null && local.length() > 0) {
+        return local
+    } else if (System.getProperty(key)) {
+        return System.getProperty(key)
+    } else if (project.hasProperty(key)) {
+        return project.getProperty(key)
+    } else {
+        return defVal
+    }
 }
 
 afterEvaluate { project ->
+
     uploadArchives {
         repositories {
             mavenDeployer {

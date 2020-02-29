@@ -13,7 +13,7 @@ class HappyParser {
  * @param global : rootProject config. from `ext.HappyMaven=[]` in `build.gradle`
  * @param config : final config
  */
-    static void parseRootConfig(global, HappyMavenExtension config, boolean showLog) {
+    static void parseRootConfig(global, HappyMavenExtension config) {
         def gId = global["GROUP_ID"]
         def aId = global["ARTIFACT_ID"]
         def version = global["VERSION"]
@@ -55,11 +55,6 @@ class HappyParser {
 
         config.developerId = dId
         config.developerName = dName
-
-        if (showLog) {
-            println("\n----Root Config----")
-            println(String.format("GROUP_ID=%s\nARTIFACT_ID=%s\nVERSION=%s\nPACKAGING=%s\nPOM_NAME=%s\nLICENSE_NAME=%s\nDEVELOPER_ID=%s\nDEVELOPER_NAME=%s\nRELEASE_REPO_URL=%s\nNEXUS_USER_NAME(project,final)=(%s,%s)", gId, aId, version, pack, pName, lName, dId, dName, repo, user, config.nexusUserName))
-        }
     }
 
     /**
@@ -67,11 +62,7 @@ class HappyParser {
      * @param module : module config. from `HappyMaven{}` in `build.gradle`
      * @param config : final config
      */
-    static void parseModuleConfig(HappyMavenExtension module, HappyMavenExtension config, boolean showLog) {
-        if (showLog) {
-            println("\n----Module Config----")
-            println(module)
-        }
+    static void parseModuleConfig(HappyMavenExtension module, HappyMavenExtension config) {
         // Main
         if (module.groupId) {
             config.groupId = module.groupId
@@ -138,13 +129,26 @@ class HappyParser {
         }
     }
 
-    static String getPropertyVal(project, key) {
-        if (System.getProperty(key)) {
+    static localProperties(project, key, defaultVal) {
+        Properties properties = new Properties()
+        if (project.rootProject.file('local.properties').exists()) {
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            return properties.getProperty(key, defaultVal)
+        } else {
+            return null
+        }
+    }
+
+    static getPropertyVal(project, key, defVal = "") {
+        def local = localProperties(project, key, defVal)
+        if (local != null && local.length() > 0) {
+            return local
+        } else if (System.getProperty(key)) {
             return System.getProperty(key)
         } else if (project.hasProperty(key)) {
             return project.getProperty(key)
         } else {
-            return null
+            return defVal
         }
     }
 }

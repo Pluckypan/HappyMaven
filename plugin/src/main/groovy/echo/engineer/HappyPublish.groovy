@@ -7,10 +7,8 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.javadoc.Javadoc
 
 class HappyPublish {
-    static void publish(Project project, HappyMavenExtension config, boolean showLog) {
-        project.apply plugin: 'maven'
-        project.apply plugin: 'signing'
 
+    static void androidConfig(Project project, HappyMavenExtension config) {
         //SourcesJar
         project.task('androidSourcesJar', type: Jar) {
             classifier = 'sources'
@@ -22,16 +20,16 @@ class HappyPublish {
             classpath += project.files(project.android.getBootClasspath().join(File.pathSeparator))
             failOnError true
 
-            def variant=project.android.libraryVariants.toList().first()
+            def variant = project.android.libraryVariants.toList().first()
             Task javaCompileTask
-            if (aa.hasProperty('javaCompileProvider')) {
+            if (variant.hasProperty('javaCompileProvider')) {
                 // Android 3.3.0+
                 javaCompileTask = variant.javaCompileProvider.get()
             } else {
                 // Older Android
                 javaCompileTask = variant.javaCompile
             }
-            if (javaCompileTask!=null){
+            if (javaCompileTask != null) {
                 classpath += javaCompileTask.classpath
                 classpath += javaCompileTask.outputs.files
             }
@@ -50,18 +48,50 @@ class HappyPublish {
             options.links("http://docs.oracle.com/javase/7/docs/api/")
             options.linksOffline "https://developer.android.com/reference", "${project.android.sdkDirectory}/docs/reference"
         }
+
         project.task('androidJavadocsJar', type: Jar, dependsOn: 'androidJavadocs') {
             classifier = 'javadoc'
             from project.tasks.androidJavadocs.destinationDir
         }
+
+        project.artifacts {
+            archives project.tasks.androidSourcesJar
+            archives project.tasks.androidJavadocsJar
+        }
+    }
+
+    static void javaConfig(Project project, HappyMavenExtension config) {
+
+        project.task('sourcesJar', type: Jar, dependsOn: 'classes') {
+            classifier = 'sources'
+            from project.sourceSets.main.allSource
+        }
+
+        project.task('javadocJar', type: Jar, dependsOn: 'javadoc') {
+            classifier = 'sources'
+            from project.tasks.javadoc.destinationDir
+        }
+
+        project.artifacts {
+            archives project.tasks.sourcesJar
+            archives project.tasks.javadocJar
+        }
+    }
+
+    static void publish(Project project, HappyMavenExtension config, boolean androidLib) {
+        project.apply plugin: 'maven'
+        project.apply plugin: 'signing'
+
+        if (androidLib) {
+            androidConfig(project, config)
+        } else {
+            javaConfig(project, config)
+        }
+
         // gen JavaDoc chinese word error
         project.tasks.withType(Javadoc) {
             options.addStringOption('Xdoclint:none', '-quiet')
             options.addStringOption('encoding', 'UTF-8')
-        }
-        project.artifacts {
-            archives project.tasks.androidSourcesJar
-            archives project.tasks.androidJavadocsJar
         }
 
         //Upload
@@ -74,21 +104,15 @@ class HappyPublish {
                         def _pwd = HappyParser.getPropertyVal(project, "signing.password")
                         def _ring = HappyParser.getPropertyVal(project, "signing.secretKeyRingFile")
                         if (!_id) {
-                            if (showLog) {
-                                project.logger.error("****************** signing.keyId is nil ******************")
-                            }
+                            project.logger.error("****************** signing.keyId is nil ******************")
                             return
                         }
                         if (!_pwd) {
-                            if (showLog) {
-                                project.logger.error("****************** signing.password is nil ******************")
-                            }
+                            project.logger.error("****************** signing.password is nil ******************")
                             return
                         }
                         if (!_ring || !new File(_ring).exists()) {
-                            if (showLog) {
-                                project.logger.error("****************** signing.secretKeyRingFile not exists ******************")
-                            }
+                            project.logger.error("****************** signing.secretKeyRingFile not exists ******************")
                             return
                         }
                         project.signing.signPom(deployment)
