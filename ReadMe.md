@@ -16,7 +16,7 @@
             mavenCentral()
         }
         dependencies {
-            classpath 'engineer.echo:happymaven:0.0.4'
+            classpath 'engineer.echo:happymaven:0.0.6'
         }
     }
     ```
@@ -62,7 +62,7 @@
 
 5. upload archives
 
- ![upload archives](image/upload_archives.png)
+ ![upload archives](image/upload_archives_1.jpg)
  
  or run 
  
@@ -159,8 +159,6 @@ HappyMaven {
 ```
 
 V. TODO
-- [x] 中文乱码 HappyPublish.groovy:19
-- [x] WARNING: API 'variant.getJavaCompile()' is obsolete and has been replaced with 'variant.getJavaCompileProvider()'.
 
 Ⅵ. License
 
