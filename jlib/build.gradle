@@ -1,0 +1,35 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+buildscript {
+    repositories {
+        maven{
+            url 'http://localhost:8081/repository/maven-releases/'
+        }
+    }
+    dependencies {
+        classpath 'engineer.echo:happymaven:0.0.6'
+    }
+}
+apply plugin: 'happy-maven'
+
+HappyMaven {
+    artifactId = "jlib"
+    version = "0.0.1"
+
+    pomName = "JLib"
+    pomDesc = "HappyMaven test Jave library"
+    pomUrl = "https://github.com/Pluckypan/HappyMaven"
+
+    scmUrl = "https://github.com/Pluckypan/HappyMaven.git"
+    scmConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
+    scmDevConnection = "scm:git@github.com:Pluckypan/HappyMaven.git"
+    releaseRepoUrl = "./build/publish/"
+    snapshotRepoUrl = "./build/publish/"
+}
