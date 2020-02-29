@@ -1,1 +1,1 @@
-include ':app', ':xlib', ':ylib', ':plugin', ':klib'
+include ':app', ':xlib', ':ylib', ':plugin', ':klib', ':jlib'

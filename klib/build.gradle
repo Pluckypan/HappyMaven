@@ -41,7 +41,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'engineer.echo:happymaven:0.0.4'
+        classpath 'engineer.echo:happymaven:0.0.6'
     }
 }
 apply plugin: 'happy-maven'
