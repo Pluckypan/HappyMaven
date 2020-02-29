@@ -16,7 +16,7 @@
             mavenCentral()
         }
         dependencies {
-            classpath 'engineer.echo:happymaven:0.0.6'
+            classpath 'engineer.echo:happymaven:0.0.7'
         }
     }
     ```
