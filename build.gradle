@@ -72,3 +72,5 @@ ext.HappyMaven = [
         "RELEASE_REPO_URL" : "../localPublish",
         "SNAPSHOT_REPO_URL": "../localPublish"
 ]
+
+ext.happyMaven = 'engineer.echo:happymaven:0.0.7'

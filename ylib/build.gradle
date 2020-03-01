@@ -4,7 +4,6 @@ android {
     compileSdkVersion 28
 
 
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -34,10 +33,13 @@ dependencies {
 }
 buildscript {
     repositories {
+        maven {
+            url 'file:../localPublish'
+        }
         mavenCentral()
     }
     dependencies {
-        classpath 'engineer.echo:happymaven:0.0.7'
+        classpath rootProject.ext.happyMaven
     }
 }
 apply plugin: 'happy-maven'
