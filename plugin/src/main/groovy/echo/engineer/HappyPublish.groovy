@@ -68,7 +68,7 @@ class HappyPublish {
         }
 
         project.task('javadocJar', type: Jar, dependsOn: 'javadoc') {
-            classifier = 'sources'
+            classifier = 'javadoc'
             from project.tasks.javadoc.destinationDir
         }
 
